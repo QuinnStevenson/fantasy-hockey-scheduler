@@ -11,7 +11,7 @@ module.exports = {
   		return [
 		  	{
 		  		source: '/',
-		  		destination: "https://api.login.yahoo.com/oauth2/request_auth?client_id=dj0yJmk9NlBlVTN0RDZOcW95JmQ9WVdrOVNGRm9TazAyVEhnbWNHbzlNQT09JnM9Y29uc3VtZXJzZWNyZXQmc3Y9MCZ4PTlh--&redirect_uri=oob&response_type=code&language=en-us",
+		  		destination: "https://api.login.yahoo.com/oauth2/request_auth?client_id=dj0yJmk9NlBlVTN0RDZOcW95JmQ9WVdrOVNGRm9TazAyVEhnbWNHbzlNQT09JnM9Y29uc3VtZXJzZWNyZXQmc3Y9MCZ4PTlh&redirect_uri=https://fantasy-hockey-scheduler.vercel.app/&response_type=code&language=en-us",
 		  		permanent: false,
 		  	},
 	  	]
