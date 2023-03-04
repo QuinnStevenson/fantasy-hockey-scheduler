@@ -1,8 +1,7 @@
-import { useRouter } from 'next/router'
+import { withRouter } from 'next/router'
 
-export default function FirstPost() {
-  //const router = useRouter();
-  //console.log(router.pathname);
-
-  return <h1>Hello Yahoo</h1>;
+function ApiSuccess({router}) {
+	return <p>{router.pathname}</p>
 }
+
+export default withRouter(ApiSuccess);
