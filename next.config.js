@@ -2,16 +2,17 @@
 
 module.exports = {
 	async redirects() {
-		let yKey = "HQhJM6Lx";
-		let yClientId = "dj0yJmk9NlBlVTN0RDZOcW95JmQ9WVdrOVNGRm9TazAyVEhnbWNHbzlNQT09JnM9Y29uc3VtZXJzZWNyZXQmc3Y9MCZ4PTlh";
+		let yKey = "WCD77E8N";
+		let yClientId = "dj0yJmk9TUdiUTFpU2c2S0g0JmQ9WVdrOVYwTkVOemRGT0U0bWNHbzlNQT09JnM9Y29uc3VtZXJzZWNyZXQmc3Y9MCZ4PWNj";
+		let yClientSecret = "72abdce46c9c2e7d79c6bc287426987a11a37b43";
+
 		let yReturnURL = "https://fantasy-hockey-scheduler.vercel.app/";
-        //                https://api.login.yahoo.com/oauth2/request_auth?client_id=dj0yJmk9ak5IZ2x5WmNsaHp6JmQ9WVdrOVNqQkJUMnRYTjJrbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD1hYQ--&redirect_uri=oob&response_type=code&language=en-us
-		//let redirect = "https://api.login.yahoo.com/oauth2/request_auth?client_id=dj0yJmk9NlBlVTN0RDZOcW95JmQ9WVdrOVNGRm9TazAyVEhnbWNHbzlNQT09JnM9Y29uc3VtZXJzZWNyZXQmc3Y9MCZ4PTlh--&redirect_uri=oob&response_type=code&language=en-us;
+		let redirect = "https://api.login.yahoo.com/oauth2/request_auth?client_id=" + yClientId + "&redirect_uri=" + yReturnURL + "&response_type=code&language=en-us";
 
   		return [
 		  	{
 		  		source: '/',
-		  		destination: "https://api.login.yahoo.com/oauth2/request_auth?client_id=dj0yJmk9NlBlVTN0RDZOcW95JmQ9WVdrOVNGRm9TazAyVEhnbWNHbzlNQT09JnM9Y29uc3VtZXJzZWNyZXQmc3Y9MCZ4PTlh&redirect_uri=https://fantasy-hockey-scheduler.vercel.app/&response_type=code&language=en-us",
+		  		destination: redirect,
 		  		permanent: false,
 		  	},
 	  	]
