@@ -1,20 +1,16 @@
 /** @type {import('next').NextConfig} */
-const Tokens = require("./tokens.json");
+const yahooData = require("./src/utils/yahooData.json");
 
 module.exports = {
+
 	async redirects() {
-		let yReturnURL = "https://fantasy-hockey-scheduler.vercel.app/posts/api-success";
-
-		let redirect = "https://api.login.yahoo.com/oauth2/request_auth?client_id=" + Tokens.clientId + "&redirect_uri=" + yReturnURL + "&response_type=code&language=en-us";
-
   		return [
 		  	{
 		  		source: '/',
-		  		destination: redirect,
+		  		destination: '/prerender',
 		  		permanent: false,
-		  	},
+		  	}
 	  	]
 	},
-
 	reactStrictMode: true,
 }
