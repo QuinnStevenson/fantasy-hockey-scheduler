@@ -1,5 +1,3 @@
-const yahooData = require("./yahooData.json");
-
 /*
 	Various API functions to request externally to yahoo.  As this is originates from the browser,  a CORS
 	error will be thrown.  To get around this, this site's own internal server is first sent a request, then
@@ -9,7 +7,14 @@ const yahooData = require("./yahooData.json");
 const apiRoutes = {
 	'authorizationRequest': '/api/authRequest',
 	'accessTokenRequest': '/api/accessTokenRequest',
-	'mongodbYahooDataRequest': '/api/dbPosts'
+	'mongodbYahooDataRequest': '/api/dbPosts',
+	'leagueRequest': '/api/getLeague',
+}
+
+export const getLeague = async() => {
+	const res = await fetch(apiRoutes.leagueRequest);
+
+	const final = await res.json();
 }
 
 export const updateYahooData = async(newTokenData, entry) => {
@@ -48,28 +53,36 @@ export const fetchYahooData = async () => {
 
 	//Call the refreshAPI function everytime a new access token has expired after one hour.
 	if(!entry.timeCreated || timeDifference >= 3600) {
-		console.log("SPAWNING NEW TOKEN");
-		const newTokenData = await refreshAPI();
+		const newTokenData = await refreshAPI(entry);
 
 		const updateDbData = await updateYahooData(newTokenData, entry);
 
-		console.log("New access_token:");
-		return newTokenData.access_token;
+		return newTokenData;
 	} else {
-		console.log("Current access_token:");
-		console.log(entry.accessToken);
-		return entry.accessToken;
+		return entry;
 	}
 }	
 
 export const authorizeAPI = async () => {
-	const res = await fetch(apiRoutes.authorizationRequest);
+	let options = {
+		method: 'POST',
+		headers: {'Content-Type': 'application/json'},
+		body: JSON.stringify(entry),
+	}
+
+	const res = await fetch(apiRoutes.authorizationRequest, options);
 
 	const final = await res.json();
 }
 
-export const refreshAPI = async () => {
-	const res = await fetch(apiRoutes.accessTokenRequest);
+export const refreshAPI = async (entry) => {
+	let options = {
+		method: 'POST',
+		headers: {'Content-Type': 'application/json'},
+		body: JSON.stringify(entry),
+	}
+
+	const res = await fetch(apiRoutes.accessTokenRequest, options);
 
 	const final = await res.json();
 

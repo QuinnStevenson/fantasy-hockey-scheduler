@@ -1,6 +1,4 @@
 /** @type {import('next').NextConfig} */
-const yahooData = require("./src/utils/yahooData.json");
-
 module.exports = {
 
 	async redirects() {

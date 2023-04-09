@@ -1,17 +1,17 @@
-const yahooData = require("../../utils/yahooData.json");
-
 /*
 	Refreshes access token after 1 hour expiration
 */
 
 const handler = async (req, res) => {
-	const authHeader = Buffer.from(`${yahooData.clientId}:${yahooData.clientSecret}`, `binary`).toString(`base64`);
+	const tokenData = req.body;
 
-	let details = {
-		'client_id': yahooData.clientId,
-		'client_secret': yahooData.clientSecret,
+	const authHeader = Buffer.from(`${tokenData.clientId}:${tokenData.clientSecret}`, `binary`).toString(`base64`);	
+
+	const details = {
+		'client_id': tokenData.clientId,
+		'client_secret': tokenData.clientSecret,
 		'redirect_uri': 'oob',
-		'refresh_token': yahooData.refreshToken,
+		'refresh_token': tokenData.refreshToken,
 		'grant_type': 'refresh_token'		
 	}
 
@@ -27,7 +27,7 @@ const handler = async (req, res) => {
 	formBody = formBody.join("&");
 
 	try{
-		const response = await fetch(yahooData.tokenURL, {
+		const response = await fetch(tokenData.tokenURL, {
 			method: 'POST',
 			headers: {
 				'Authorization': `Basic ${authHeader}`,

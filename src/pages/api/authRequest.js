@@ -1,5 +1,3 @@
-const yahooData = require("../../utils/yahooData.json");
-
 /*
 	API route handles communicating with the yahoo OAUTH2 endpoint that exchanges an access code for an
 	access token and refresh token.  Access token's have a 1 hour lifespan and must be refreshed using
@@ -8,13 +6,15 @@ const yahooData = require("../../utils/yahooData.json");
 */
 
 const handler = async (req, res) => {
-	const authHeader = Buffer.from(`${yahooData.clientId}:${yahooData.clientSecret}`, `binary`).toString(`base64`);
+	const tokenData = req.body;
+
+	const authHeader = Buffer.from(`${tokenData.clientId}:${tokenData.clientSecret}`, `binary`).toString(`base64`);
 
 	let details = {
-		'client_id': yahooData.clientId,
-		'client_secret': yahooData.clientSecret,
+		'client_id': tokenData.clientId,
+		'client_secret': tokenData.clientSecret,
 		'redirect_uri': 'oob',
-		'code': yahooData.token,
+		'code': tokenData.token,
 		'grant_type': 'authorization_code'		
 	}
 
@@ -30,7 +30,7 @@ const handler = async (req, res) => {
 	formBody = formBody.join("&");
 
 	try{
-		const response = await fetch(yahooData.tokenURL, {
+		const response = await fetch(tokenData.tokenURL, {
 			method: 'POST',
 			headers: {
 				'Authorization': `Basic ${authHeader}`,
