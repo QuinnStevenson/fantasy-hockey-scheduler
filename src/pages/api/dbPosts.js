@@ -2,7 +2,7 @@ import clientPromise from "../../lib/mongodb"
 
 const handler = async(req, res) => {
 	const client = await clientPromise;
-	const db = client.db("FantasyHockey");
+	const db = client.db("fantasyHockey");
 
 	switch(req.method) {
 		case "POST":
